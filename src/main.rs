@@ -104,7 +104,6 @@ async fn handle_request(
         .unwrap_or_default()
         .to_string();
 
-
     // Handle directory paths, empty paths, and paths without extensions
     let path = if path.is_empty() || path == "index.html" {
         "index.html".to_string()
@@ -127,8 +126,8 @@ async fn handle_request(
     // Determine the file extension
     let extension = path.split('.').last().unwrap_or_default();
 
-    // Check if the extension is html or htm
-    if extension != "html" && extension != "htm" {
+    // Check if the extension is html, htm, or js
+    if extension != "html" && extension != "htm" && extension != "js" {
         // Redirect to the specified URL
         let redirect_url = format!("https://r2.naru.pub/{}/{}", subdomain, path);
         return Ok(Response::builder()
