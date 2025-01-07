@@ -124,6 +124,20 @@ async fn handle_request(
         format!("{}/{}", subdomain, path)
     };
 
+    // Determine the file extension
+    let extension = path.split('.').last().unwrap_or_default();
+
+    // Check if the extension is html or htm
+    if extension != "html" && extension != "htm" {
+        // Redirect to the specified URL
+        let redirect_url = format!("https://r2.naru.pub/{}/{}", subdomain, path);
+        return Ok(Response::builder()
+            .status(302) // HTTP status code for redirection
+            .header("Location", redirect_url)
+            .body(Full::new(Bytes::from("Redirecting...")))
+            .unwrap());
+    }
+
     // Get the object from S3
     match s3_client
         .get_object()
