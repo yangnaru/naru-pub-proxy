@@ -121,7 +121,7 @@ async fn handle_request(
     let key = if subdomain.is_empty() {
         path.to_string()
     } else {
-        format!("home/{}/{}", subdomain, path)
+        format!("{}/{}", subdomain, path)
     };
 
     // Get the object from S3
