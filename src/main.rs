@@ -126,8 +126,8 @@ async fn handle_request(
     // Determine the file extension
     let extension = path.split('.').last().unwrap_or_default();
 
-    // Check if the extension is html, htm, or js
-    if extension != "html" && extension != "htm" && extension != "js" {
+    // Check if the extension is html, htm, or js, or json
+    if extension != "html" && extension != "htm" && extension != "js" && extension != "json" {
         // Redirect to the specified URL
         let redirect_url = format!("https://r2.naru.pub/{}/{}", subdomain, path);
         return Ok(Response::builder()
